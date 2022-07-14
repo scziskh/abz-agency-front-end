@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '../button';
+import ButtonLink from '../button/link';
 
 const MainSection = () => {
   return (
@@ -14,7 +14,7 @@ const MainSection = () => {
             accessibility in mind. They should also be excited to learn, as the
             world of Front-End Development keeps evolving.
           </p>
-          <Button name="Sign up" />
+          <ButtonLink name="Sign up" link="/" />
         </TextWrapper>
       </Filter>
     </Wrapper>
@@ -25,8 +25,9 @@ const Wrapper = styled.section`
   margin: 0;
   width: 100%;
   height: 644px;
-  background: 100% url('/assets/pexels-alexandr-podvalny-1227513.jpeg');
-`;
+  background: url('/assets/pexels-alexandr-podvalny-1227513.jpeg');
+  background-size: 240% ;
+  background-position: 50% 78%;`
 
 const Filter = styled.div`
   width: 100%;
@@ -34,7 +35,7 @@ const Filter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: brightness(0.4);
+  backdrop-filter: brightness(0.5);
 `;
 
 const TextWrapper = styled.div`
@@ -43,8 +44,8 @@ const TextWrapper = styled.div`
   width: 380px;
   text-align: center;
   color: white;
-  button {
-    margin: auto;
+  a {
+    margin: 0 auto;
     margin-top: 10px;
   }
 `;

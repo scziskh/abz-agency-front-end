@@ -30,3 +30,8 @@ h1 {
   line-height: 40px;
   font-weight: 400;
 }
+
+a {
+  color: var(--textColor);
+  text-decoration: none;
+}

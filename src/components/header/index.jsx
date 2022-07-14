@@ -1,16 +1,19 @@
 import styled from 'styled-components';
-import Button from '../button';
+import ButtonLink from '../button/link';
 
 const Header = () => {
   return (
     <Wrapper>
       <div>
-        <img src='/assets/Logo.svg' width="104px" height="26px" />
+        <img src="/assets/Logo.svg" width="104px" height="26px" />
       </div>
-      <div><Button name='Users'/><Button name='Sign up'/></div>
+      <div>
+        <ButtonLink name="Users" link="/" />
+        <ButtonLink name="Sign up" link="/" />
+      </div>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.header`
   height: 60px;
@@ -20,8 +23,8 @@ const Wrapper = styled.header`
   img {
     margin-top: 7px;
   }
-  button {
-    margin-left: 9px;
+  a {
+    margin-left: 10px;
   }
 `;
 
