@@ -24,10 +24,10 @@ const MainSection = () => {
 const Wrapper = styled.section`
   margin: 0;
   width: 100%;
-  height: 644px;
+  height: 650px;
   background: url('/assets/pexels-alexandr-podvalny-1227513.jpeg');
-  background-size: 240% ;
-  background-position: 50% 78%;`
+  background-size: 220% ;
+  background-position: 50% 80%;`
 
 const Filter = styled.div`
   width: 100%;
@@ -46,7 +46,7 @@ const TextWrapper = styled.div`
   color: white;
   a {
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 11px;
   }
 `;
 

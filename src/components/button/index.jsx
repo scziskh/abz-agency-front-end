@@ -6,7 +6,8 @@ const Button = props => {
 
 const Wrapper = styled.a`
   border: none;
-  width: 100px;
+  min-width: 100px;
+  padding: 0 19px;
   height: 36px;
   border-radius: 18px;
   background-color: var(--primaryColor);

@@ -5,9 +5,9 @@ const ButtonLink = props => {
 };
 
 const Wrapper = styled.a`
-  width: 100px;
-  padding: 5px 0;
-  border-radius: 18px;
+  min-width: 100px;
+  padding: 4px 18px;
+  border-radius: 17px;
   background-color: var(--primaryColor);
   display: inline-block;
   text-align: center;

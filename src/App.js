@@ -1,20 +1,16 @@
-import styled from 'styled-components';
-import Header from './components/header';
+import GetRequest from './components/get-request';
 import MainSection from './components/main-section';
+import PostRequest from './components/post-request';
+import MainLayer from './layers/mainLayer';
 
 const App = () => {
   return (
-    <Wrapper>
-      <Header />
+    <MainLayer>
       <MainSection />
-    </Wrapper>
+      <GetRequest />
+      <PostRequest />
+    </MainLayer>
   );
-}
-
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 1160px;
-  margin: 0 auto;
-`;
+};
 
 export default App;
