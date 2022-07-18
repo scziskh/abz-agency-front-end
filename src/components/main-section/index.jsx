@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ButtonLink from '../button/link';
+import ButtonLink from '../button';
 
 const MainSection = () => {
   return (

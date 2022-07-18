@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ButtonLink from '../button/link.jsx';
+import ButtonLink from '../button/index.jsx';
 import Card from '../card/index.jsx';
 
 const GetRequest = () => {
@@ -15,7 +15,7 @@ const GetRequest = () => {
           <Card />
           <Card />
         </CardsGroup>
-        <ButtonLink href="/" name="Show more"/>
+        <ButtonLink link="/" name="Show more" />
       </Wrapper>
     </>
   );

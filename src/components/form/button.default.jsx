@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
-const ButtonLink = props => {
-  return <Wrapper href={props.link}>{props.name}</Wrapper>;
+const Button = props => {
+  return <Wrapper href="">{props.name}</Wrapper>;
 };
 
 const Wrapper = styled.a`
+  border: none;
   min-width: 100px;
-  padding: 4px 18px;
-  border-radius: 17px;
+  padding: 0 19px;
+  height: 36px;
+  border-radius: 18px;
   background-color: var(--primaryColor);
-  display: inline-block;
-  text-align: center;
   transition: filter 0.25s;
   :hover {
     filter: brightness(1.05);
   }
 `;
 
-export default ButtonLink;
+export default Button;
