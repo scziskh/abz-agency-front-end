@@ -21,11 +21,10 @@ const Input = styled.input`
   border: 1px solid var(--formColor);
   border-radius: 4px;
   padding: 13px 15px;
-  margin: 6px 0;
   z-index: 1;
   &:focus ~ label,
   &:not(:placeholder-shown) + label {
-    transform: translateY(-26px);
+    transform: translateY(-28px);
     padding: 0 5px;
     font-size: 14px;
     background-color: var(--backgroundColor);
@@ -37,8 +36,8 @@ const Label = styled.label`
   transition: 0.25s all;
   pointer-events: none;
   position: absolute;
-  top: 20px;
-  left: 16px;
+  top: 15px;
+  left: 17px;
 `;
 
 export default InputDefault;

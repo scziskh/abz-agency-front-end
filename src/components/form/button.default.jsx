@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 
 const Button = props => {
-  return <Wrapper href="">{props.name}</Wrapper>;
+  return <Wrapper>{props.name}</Wrapper>;
 };
 
-const Wrapper = styled.a`
+const Wrapper = styled.button`
   border: none;
   min-width: 100px;
-  padding: 0 19px;
-  height: 36px;
+  height: 34px;
   border-radius: 18px;
   background-color: var(--primaryColor);
   transition: filter 0.25s;
+  cursor: pointer;
   :hover {
     filter: brightness(1.05);
+  }
+  :disabled {
+    color: white;
+    background-color: var(--formColor);
   }
 `;
 
