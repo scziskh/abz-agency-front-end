@@ -21,6 +21,15 @@ const Wrapper = styled.header`
   width: 100%;
   background-color: white;
   height: 100%;
+  @media (max-width: 1280px) {
+    padding: 0 60px;
+  }
+  @media (max-width: 768px) {
+    padding: 0 32px;
+  }
+  @media (max-width: 480px) {
+    padding: 0 16px;
+  } ;
 `;
 
 const ContentWrapper = styled.div`

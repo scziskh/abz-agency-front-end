@@ -9,14 +9,11 @@ const Card = props => {
         <img src="assets/photo-cover.svg" />
       </Image>
       <Name>
-        <p>Name</p>
+        <p>{props.name}</p>
       </Name>
       <Contacts>
-        <p>
-          Lead Independent Director of Independent Company of Independent
-          Country
-        </p>
-        <p>Takamuru@email.com</p>
+        <p>{props.jobTitle}</p>
+        <p>{props.email}</p>
         <p>{phone}</p>
       </Contacts>
     </Wrapper>
@@ -36,6 +33,13 @@ const Wrapper = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+  @media (max-width: 768px) {
+    width: calc((100% - 30px) / 2);
+  }
+  @media (max-width: 480px) {
+    grid-row-gap: 20px;
+    width: 100%;
   }
 `;
 const Image = styled.div`

@@ -4,10 +4,10 @@ const InputFile = props => (
   <Label htmlFor="file">
     <Input type="file" id="file" />
     <Upload>
-      <p>Upload</p>
+      <p>{props.upload}</p>
     </Upload>
     <FileName>
-      <p>Upload your photo</p>
+      <p>{props.fileName}</p>
     </FileName>
   </Label>
 );
@@ -30,6 +30,9 @@ const Upload = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 999;
+  @media (max-width: 480px) {
+    width: 83px;
+  }
 `;
 
 const FileName = styled.div`
@@ -43,6 +46,9 @@ const FileName = styled.div`
   align-items: center;
   padding-left: 16px;
   z-index: -1;
+  @media (max-width: 480px) {
+    width: 247px;
+  }
 `;
 
 export default InputFile;

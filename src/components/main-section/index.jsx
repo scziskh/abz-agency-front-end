@@ -26,8 +26,20 @@ const Wrapper = styled.section`
   width: 100%;
   height: 650px;
   background: url('/assets/pexels-alexandr-podvalny-1227513.jpeg');
-  background-size: 220% ;
-  background-position: 50% 80%;`
+  background-size: 220%;
+  background-position: 50% 80%;
+  @media (max-width: 1280px) {
+    background-size: 260%;
+    background-position: 50% 80%;
+  }
+  @media (max-width: 768px) {
+    height: 500px;
+  }
+  @media (max-width: 480px) {
+    background-size: 260%;
+    background-position: 50% 90%;
+  }
+`;
 
 const Filter = styled.div`
   width: 100%;
@@ -48,6 +60,10 @@ const TextWrapper = styled.div`
     margin: 0 auto;
     margin-top: 11px;
   }
+  @media (max-width: 480px) {
+    margin-top: -32px;
+    width: 320px;
+  } ;
 `;
 
 export default MainSection;

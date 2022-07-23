@@ -23,7 +23,7 @@ const PostRequest = () => {
             </RadioGroup>
           </div>
           <DivFile>
-            <InputFile />
+            <InputFile upload="Upload" fileName="Upload your photo" />
           </DivFile>
           <Button name="Sign up" />
         </form>
@@ -46,6 +46,13 @@ const Wrapper = styled.section`
     gap: 50px;
     button {
       margin: -1px auto;
+    }
+  }
+  @media (max-width: 480px) {
+    width: 330px;
+    margin: 0 auto;
+    form {
+      width: 330px;
     }
   }
 `;

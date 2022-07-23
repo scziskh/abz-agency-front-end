@@ -10,7 +10,7 @@ const InputRadio = props => (
 const Wrapper = styled.div`
   position: relative;
   margin: 0 auto;
-  width: 380px;
+  width: 100%;
 `;
 
 const Input = styled.input`
