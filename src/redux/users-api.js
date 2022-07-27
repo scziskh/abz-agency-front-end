@@ -4,7 +4,10 @@ export const usersApi = createApi({
   reducerPath: 'calculatorApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://frontend-test-assignment-api.abz.agency' }),
   endpoints: build => ({
-    getUsers: build.query({ query: () => '/api/v1/users' }),
+    getUsers: build.query({ 
+      query: (page, count) => `/api/v1/users?page=${page}&count=6`, 
+    }),
+    
   }),
 });
 

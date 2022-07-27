@@ -5,7 +5,7 @@ import Card from '../card/index.jsx';
 import { useGetUsersQuery } from '../../redux/users-api.js';
 
 const GetRequest = () => {
-  const { data } = useGetUsersQuery();
+  const { data } = useGetUsersQuery(1);
 
   const [users, setUsers] = useState(null);
   
