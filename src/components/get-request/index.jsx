@@ -1,8 +1,22 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ButtonLink from '../button/index.jsx';
 import Card from '../card/index.jsx';
+import { useGetUsersQuery } from '../../redux/users-api.js';
 
 const GetRequest = () => {
+  const { data } = useGetUsersQuery();
+
+  const [users, setUsers] = useState(null);
+  
+  useEffect(() => {
+    if (data) {
+      setUsers(data);
+    }
+    console.log(data);
+  }, [data]);
+
+
   return (
     <>
       <Wrapper>
