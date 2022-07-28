@@ -33,11 +33,21 @@ const GetRequest = () => {
   useEffect(
     () =>
       setButton(() => {
-        if (data?.total_users > usersCount) {
+        const limit = 99;
+        const maxCount = data?.total_users < limit ? usersCount : limit;
+        if (maxCount > usersCount) {
           return (
             <Button
               name="Show more"
-              function={() => setUsersCount(() => usersCount + countSteps)}
+              function={() =>
+                setUsersCount(() => {
+                  const result = usersCount + countSteps;
+                  if (result < limit) {
+                    return result;
+                  }
+                  return limit;
+                })
+              }
             />
           );
         }
