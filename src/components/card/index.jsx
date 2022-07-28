@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import phoneFormatter from '../../helpers/phone-formatter';
 
 const Card = props => {
-  const phone = phoneFormatter(props.tel);
+  const phone = phoneFormatter(props.phone);
   return (
     <Wrapper>
       <Image>
-        <img src="assets/photo-cover.svg" />
+        <img src={props.photo} />
       </Image>
       <Name>
         <p>{props.name}</p>
       </Name>
       <Contacts>
-        <p>{props.jobTitle}</p>
+        <p>{props.position}</p>
         <p>{props.email}</p>
         <p>{phone}</p>
       </Contacts>

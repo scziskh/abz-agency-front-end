@@ -1,65 +1,57 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import ButtonLink from '../button/index.jsx';
-import Card from '../card/index.jsx';
 import { useGetUsersQuery } from '../../redux/users-api.js';
+import styled from 'styled-components';
+import Card from '../card/index.jsx';
+import Button from '../form/button.default.jsx';
 
 const GetRequest = () => {
-  const { data } = useGetUsersQuery(1);
+  const countSteps = 6;
+  const [usersCount, setUsersCount] = useState(() => countSteps);
 
-  const [users, setUsers] = useState(null);
-  
+  const { data } = useGetUsersQuery(usersCount);
+
+  const [cardsData, setCardsData] = useState();
   useEffect(() => {
     if (data) {
-      setUsers(data);
+      const users = data.users;
+      const cards = users.map(user => (
+        <Card
+          key={user.id}
+          photo={user.photo}
+          name={user.name}
+          phone={user.phone}
+          email={user.email}
+          position={user.position}
+        />
+      ));
+      setCardsData(cards);
     }
-    console.log(data);
   }, [data]);
 
+  const [button, setButton] = useState();
+
+  useEffect(
+    () =>
+      setButton(() => {
+        if (data?.total_users > usersCount) {
+          return (
+            <Button
+              name="Show more"
+              function={() => setUsersCount(() => usersCount + countSteps)}
+            />
+          );
+        }
+        return;
+      }),
+    [data, usersCount],
+  );
 
   return (
     <>
       <Wrapper>
         <h1> Working with GET request</h1>
-        <CardsGroup>
-          <Card
-            name="Anton Solomin"
-            tel="+380633216547"
-            email="solomin@gmail.com"
-            jobTitle="Director"
-          />
-          <Card
-            name="Igor Gorlov"
-            tel="+380633216545"
-            email="gorlov@gmail.com"
-            jobTitle="Director of Director"
-          />
-          <Card
-            name="Aleksander Pogoloviniuk-Ihnatushin"
-            tel="+380688767938"
-            email="api@association-of-directors.ua"
-            jobTitle="Director of Director of Director"
-          />
-          <Card
-            name="Artur Jobian"
-            tel="+380633216555"
-            email="jobian@ukr.net"
-            jobTitle="Director of Company"
-          />
-          <Card
-            name="Artur Solomin"
-            tel="+380633216537"
-            email="solomin@mail.ru"
-            jobTitle="Director"
-          />
-          <Card
-            name="Anton Solomiy"
-            tel="+380633216539"
-            email="solomiy@gmail.com"
-            jobTitle="Director"
-          />
-        </CardsGroup>
-        <ButtonLink link="/" name="Show more" />
+        <CardsGroup>{cardsData}</CardsGroup>
+        {button}
       </Wrapper>
     </>
   );

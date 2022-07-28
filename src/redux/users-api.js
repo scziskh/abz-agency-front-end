@@ -5,7 +5,7 @@ export const usersApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://frontend-test-assignment-api.abz.agency' }),
   endpoints: build => ({
     getUsers: build.query({ 
-      query: (page, count) => `/api/v1/users?page=${page}&count=6`, 
+      query: (count) => `/api/v1/users?count=${count}`, 
     }),
     
   }),

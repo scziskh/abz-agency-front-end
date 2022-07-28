@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const Button = props => {
-  return <Wrapper>{props.name}</Wrapper>;
+  return <Wrapper onClick={props.function}>{props.name}</Wrapper>;
 };
 
 const Wrapper = styled.button`
   border: none;
   min-width: 100px;
+  padding: 4px 18px;
   height: 34px;
   border-radius: 18px;
   background-color: var(--primaryColor);
