@@ -3,11 +3,12 @@ import { useGetUsersQuery } from '../../redux/users-api.js';
 import styled from 'styled-components';
 import Card from '../card/index.jsx';
 import Button from '../form/button.default.jsx';
+import Preloader from '../preloader/index.jsx';
 
 const GetRequest = props => {
   const count = props.countSteps;
   const [page, setPage] = useState(props.startPage);
-  const { data: usersData, isLoading } = useGetUsersQuery({ count, page });
+  const { data: usersData, isFetching } = useGetUsersQuery({ count, page });
 
   const [users, setUsers] = useState([]);
 
@@ -15,28 +16,23 @@ const GetRequest = props => {
 
   useEffect(() => {
     if (usersData) {
-      setUsers(users.concat(usersData.users));
+      setUsers((prevUsers) => prevUsers.concat(usersData.users));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersData]);
 
   useEffect(() => {
     if (usersData) {
-      setHideButton(usersData.total_users === users.length ? true : false);
+      setHideButton(usersData.total_users === users.length);
     }
   }, [users.length, usersData]);
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
 
   return (
     <Wrapper>
       <h1> Working with GET request</h1>
       <CardsGroup>
-        {users?.map(user => (
+        {users?.map((user, index) => (
           <Card
-            key={user.id}
+            key={index}
             photo={user.photo}
             name={user.name}
             position={user.position}
@@ -45,11 +41,15 @@ const GetRequest = props => {
           ></Card>
         ))}
       </CardsGroup>
-      <Button
-        name="Show more"
-        function={() => setPage(page + 1)}
-        hide={hideButton}
-      />
+      {isFetching ? (
+        <Preloader />
+      ) : (
+        <Button
+          name="Show more"
+          function={() => setPage(page + 1)}
+          hide={hideButton}
+        />
+      )}
     </Wrapper>
   );
 };
