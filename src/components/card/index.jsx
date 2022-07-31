@@ -10,11 +10,21 @@ const Card = props => {
       </Image>
       <Name>
         <p>{props.name}</p>
+        <span>{props.name}</span>
       </Name>
       <Contacts>
-        <p>{props.position}</p>
-        <p>{props.email}</p>
-        <p>{phone}</p>
+        <div>
+          <p>{props.position}</p>
+          <span>{props.position}</span>
+        </div>
+        <div>
+          <p>{props.email}</p>
+          <span>{props.email}</span>
+        </div>
+        <div>
+          <p>{phone}</p>
+          <span>{phone}</span>
+        </div>
       </Contacts>
     </Wrapper>
   );
@@ -26,12 +36,28 @@ const Wrapper = styled.div`
   display: grid;
   grid-row-gap: 20px;
   border-radius: 10px;
+  position: relative;
   div {
     overflow: hidden;
+    white-space: nowrap;
     p {
-      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
+      &:hover ~ span {
+        display: block;
+      }
+    }
+    span {
+      margin-top: 12px;
+      display: none;
+      border-radius: 5px;
+      color: white;
+      background-color: #212121;
+      padding: 2px 8px;
+      position: absolute;
+      left: 45%;
+      z-index: 999;
     }
   }
   @media (max-width: 768px) {
