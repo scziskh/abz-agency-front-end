@@ -5,8 +5,9 @@ import InputFile from '../form/input.file';
 import InputRadio from '../form/input.radio';
 
 const PostRequest = () => {
+  
+  
   return (
-    <>
       <Wrapper>
         <h1> Working with POST request</h1>
         <form>
@@ -28,7 +29,6 @@ const PostRequest = () => {
           <Button name="Sign up" />
         </form>
       </Wrapper>
-    </>
   );
 };
 

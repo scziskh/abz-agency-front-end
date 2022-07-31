@@ -7,7 +7,7 @@ const App = () => {
   return (
     <MainLayer>
       <MainSection />
-      <GetRequest />
+      <GetRequest countSteps={6} startPage={1} />
       <PostRequest />
     </MainLayer>
   );

@@ -4,66 +4,53 @@ import styled from 'styled-components';
 import Card from '../card/index.jsx';
 import Button from '../form/button.default.jsx';
 
-const GetRequest = () => {
-  const countSteps = 6;
-  const [usersCount, setUsersCount] = useState(() => countSteps);
+const GetRequest = props => {
+  const count = props.countSteps;
+  const [page, setPage] = useState(props.startPage);
+  const { data: usersData, isLoading } = useGetUsersQuery({ count, page });
 
-  const { data } = useGetUsersQuery(usersCount);
+  const [users, setUsers] = useState([]);
 
-  const [cardsData, setCardsData] = useState();
+  const [hideButton, setHideButton] = useState(false);
+
   useEffect(() => {
-    if (data) {
-      const users = data.users;
-      const cards = users.map(user => (
-        <Card
-          key={user.id}
-          photo={user.photo}
-          name={user.name}
-          phone={user.phone}
-          email={user.email}
-          position={user.position}
-        />
-      ));
-      setCardsData(cards);
+    if (usersData) {
+      setUsers(users.concat(usersData.users));
     }
-  }, [data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [usersData]);
 
-  const [button, setButton] = useState();
+  useEffect(() => {
+    if (usersData) {
+      setHideButton(usersData.total_users === users.length ? true : false);
+    }
+  }, [users.length, usersData]);
 
-  useEffect(
-    () =>
-      setButton(() => {
-        const limit = 99;
-        const maxCount = data?.total_users < limit ? usersCount : limit;
-        if (maxCount > usersCount) {
-          return (
-            <Button
-              name="Show more"
-              function={() =>
-                setUsersCount(() => {
-                  const result = usersCount + countSteps;
-                  if (result < limit) {
-                    return result;
-                  }
-                  return limit;
-                })
-              }
-            />
-          );
-        }
-        return;
-      }),
-    [data, usersCount],
-  );
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
-    <>
-      <Wrapper>
-        <h1> Working with GET request</h1>
-        <CardsGroup>{cardsData}</CardsGroup>
-        {button}
-      </Wrapper>
-    </>
+    <Wrapper>
+      <h1> Working with GET request</h1>
+      <CardsGroup>
+        {users?.map(user => (
+          <Card
+            key={user.id}
+            photo={user.photo}
+            name={user.name}
+            position={user.position}
+            email={user.email}
+            phone={user.phone}
+          ></Card>
+        ))}
+      </CardsGroup>
+      <Button
+        name="Show more"
+        function={() => setPage(page + 1)}
+        hide={hideButton}
+      />
+    </Wrapper>
   );
 };
 

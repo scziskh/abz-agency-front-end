@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
 const Button = props => {
-  return <Wrapper onClick={props.function}>{props.name}</Wrapper>;
+  return (
+    <Wrapper onClick={props.function} {...props}>
+      {props.name}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.button`
+  ${props => (props.hide ? 'display: none;' : '')}
   border: none;
   min-width: 100px;
   padding: 4px 18px;
