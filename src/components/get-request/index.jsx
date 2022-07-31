@@ -16,7 +16,7 @@ const GetRequest = props => {
 
   useEffect(() => {
     if (usersData) {
-      setUsers((prevUsers) => prevUsers.concat(usersData.users));
+      setUsers(prevUsers => prevUsers.concat(usersData.users));
     }
   }, [usersData]);
 
