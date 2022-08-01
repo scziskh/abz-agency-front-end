@@ -48,6 +48,7 @@ const GetRequest = props => {
           name="Show more"
           function={() => setPage(page + 1)}
           hide={hideButton}
+          isLoading={isFetching}
         />
       )}
     </Wrapper>
