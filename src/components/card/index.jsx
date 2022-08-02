@@ -3,23 +3,26 @@ import phoneFormatter from '../../helpers/phone-formatter';
 
 const Card = props => {
   const phone = phoneFormatter(props.phone);
+
+  const { photo, name, email, position } = props;
+
   return (
     <Wrapper>
       <Image>
-        <img src={props.photo} />
+        <img src={photo} />
       </Image>
       <Name>
-        <p>{props.name}</p>
-        <span>{props.name}</span>
+        <p>{name}</p>
+        <span>{name}</span>
       </Name>
       <Contacts>
         <div>
-          <p>{props.position}</p>
-          <span>{props.position}</span>
+          <p>{position}</p>
+          <span>{position}</span>
         </div>
         <div>
-          <p>{props.email}</p>
-          <span>{props.email}</span>
+          <p>{email}</p>
+          <span>{email}</span>
         </div>
         <div>
           <p>{phone}</p>

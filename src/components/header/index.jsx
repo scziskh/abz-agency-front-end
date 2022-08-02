@@ -6,11 +6,11 @@ const Header = () => {
     <Wrapper>
       <ContentWrapper>
         <div>
-          <img src="/assets/Logo.svg" width="104px" height="26px" />
+          <img src={`/assets/Logo.svg`} width={`104px`} height={`26px`} />
         </div>
         <div>
-          <ButtonLink name="Users" link="/" />
-          <ButtonLink name="Sign up" link="/" />
+          <ButtonLink name={`Users`} link={`/`} />
+          <ButtonLink name={`Sign up`} link={`/`} />
         </div>
       </ContentWrapper>
     </Wrapper>

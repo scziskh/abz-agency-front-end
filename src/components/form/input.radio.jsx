@@ -7,7 +7,7 @@ const InputRadio = props => {
     <ConnectForm>
       {({ register }) => (
         <Wrapper>
-          <Input type="radio" id={id} {...register(name)} />
+          <Input type={`radio`} id={id} {...register(name)} />
           <Label htmlFor={id}>{label}</Label>
         </Wrapper>
       )}

@@ -14,7 +14,7 @@ const MainSection = () => {
             accessibility in mind. They should also be excited to learn, as the
             world of Front-End Development keeps evolving.
           </p>
-          <ButtonLink name="Sign up" link="/" />
+          <ButtonLink name={`Sign up`} link={`/`} />
         </TextWrapper>
       </Filter>
     </Wrapper>

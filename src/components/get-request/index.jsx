@@ -28,7 +28,7 @@ const GetRequest = props => {
 
   return (
     <Wrapper>
-      <h1> Working with GET request</h1>
+      <h1>Working with GET request</h1>
       <CardsGroup>
         {users?.map((user, index) => (
           <Card
@@ -45,8 +45,8 @@ const GetRequest = props => {
         <Preloader />
       ) : (
         <Button
-          name="Show more"
-          function={() => setPage(page + 1)}
+          name={`Show more`}
+          func={() => setPage(page + 1)}
           hide={hideButton}
           isLoading={isFetching}
         />

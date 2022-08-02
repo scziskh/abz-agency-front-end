@@ -7,8 +7,8 @@ const InputFile = props => {
   return (
     <ConnectForm>
       {({ register }) => (
-        <Label htmlFor="file">
-          <Input type="file" id="file" {...register(name)}/>
+        <Label htmlFor={`file`}>
+          <Input type={`file`} id={`file`} {...register(name)} />
           <Upload>
             <p>{upload}</p>
           </Upload>

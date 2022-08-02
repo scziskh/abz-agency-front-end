@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Preloader = () => (
   <Wrapper>
-    <svg x="0px" y="0px" viewBox="0 0 48 48">
-      <path d="M24, 3c12, 0, 21, 10, 21, 21S36, 45, 24, 45S3, 36, 3, 24" />
+    <svg x={`0px`} y={`0px`} viewBox={`0 0 48 48`}>
+      <path d={`M24, 3c12, 0, 21, 10, 21, 21S36, 45, 24, 45S3, 36, 3, 24`} />
     </svg>
   </Wrapper>
 );

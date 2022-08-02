@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 const Button = props => {
+  const {name, func} = props
+
   return (
-    <Wrapper onClick={props.function} {...props}>
-      {props.name}
+    <Wrapper onClick={func} {...props}>
+      {name}
     </Wrapper>
   );
 };

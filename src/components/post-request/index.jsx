@@ -21,9 +21,9 @@ const PostRequest = () => {
       <h1> Working with POST request</h1>
       <FormProvider {...methods}>
         <form>
-          <InputDefault type="text" placeholder="Your name" name="name" />
-          <InputDefault type="email" placeholder="Email" name="email" />
-          <InputDefault type="text" placeholder="Phone" name="phone" />
+          <InputDefault type={`text`} placeholder={`Your name`} name={`name`} />
+          <InputDefault type={`email`} placeholder={`Email`} name={`email`} />
+          <InputDefault type={`text`} placeholder={`Phone`} name={`phone`} />
           <div>
             <RadioHeader>Select your position</RadioHeader>
             <RadioGroup>
@@ -39,12 +39,12 @@ const PostRequest = () => {
           </div>
           <DivFile>
             <InputFile
-              upload="Upload"
-              fileName="Upload your photo"
-              name="upload-photo"
+              upload={`Upload`}
+              fileName={`Upload your photo`}
+              name={`upload-photo`}
             />
           </DivFile>
-          <Button name="Sign up" />
+          <Button name={`Sign up`} />
         </form>
       </FormProvider>
     </Wrapper>

@@ -7,7 +7,7 @@ const InputDefault = props => {
     <ConnectForm>
       {({ register }) => (
         <Wrapper>
-          <Input type={type} placeholder=" " {...register(name)} />
+          <Input type={type} placeholder={` `} {...register(name)} />
           <Label htmlFor={name}>{placeholder}</Label>
         </Wrapper>
       )}
