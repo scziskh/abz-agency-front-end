@@ -5,10 +5,16 @@ const InputDefault = props => {
   const { type, name, placeholder } = props;
   return (
     <ConnectForm>
-      {({ register }) => (
+      {({ register, formState: { errors } }) => (
         <Wrapper>
-          <Input type={type} placeholder={` `} {...register(name)} />
+          <Input
+            type={type}
+            placeholder={` `}
+            {...register(name, { required: `Please enter your ${name}` })}
+            {...console.log(errors)}
+          />
           <Label htmlFor={name}>{placeholder}</Label>
+          <Error>{errors?.[name]?.message}</Error>
         </Wrapper>
       )}
     </ConnectForm>
@@ -46,6 +52,10 @@ const Label = styled.label`
   position: absolute;
   top: 15px;
   left: 17px;
+`;
+
+const Error = styled.p`
+  position: absolute;
 `;
 
 export default InputDefault;

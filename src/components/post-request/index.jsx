@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { useGetPositionsQuery } from '../../redux/users-api';
 import { FormProvider, useForm } from 'react-hook-form';
-import Button from '../form/button.default';
 import InputDefault from '../form/input.default';
 import InputFile from '../form/input.file';
 import InputRadio from '../form/input.radio';
+import InputSubmit from '../form/input.submit';
 import Preloader from '../preloader';
 
 const PostRequest = () => {
@@ -20,7 +20,7 @@ const PostRequest = () => {
     <Wrapper>
       <h1> Working with POST request</h1>
       <FormProvider {...methods}>
-        <form>
+        <form onSubmit={methods.handleSubmit()}>
           <InputDefault type={`text`} placeholder={`Your name`} name={`name`} />
           <InputDefault type={`email`} placeholder={`Email`} name={`email`} />
           <InputDefault type={`text`} placeholder={`Phone`} name={`phone`} />
@@ -44,7 +44,7 @@ const PostRequest = () => {
               name={`upload-photo`}
             />
           </DivFile>
-          <Button name={`Sign up`} />
+          <InputSubmit name={`Sign up`} />
         </form>
       </FormProvider>
     </Wrapper>

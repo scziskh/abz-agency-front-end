@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useGetUsersQuery } from '../../redux/users-api.js';
 import styled from 'styled-components';
 import Card from '../card/index.jsx';
-import Button from '../form/button.default.jsx';
+import Button from '../button/button.default.jsx';
 import Preloader from '../preloader/index.jsx';
 
 const GetRequest = props => {
