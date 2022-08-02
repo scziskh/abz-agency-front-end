@@ -1,16 +1,25 @@
 import styled from 'styled-components';
+import { ConnectForm } from '../../helpers/connect-form';
 
-const InputFile = props => (
-  <Label htmlFor="file">
-    <Input type="file" id="file" />
-    <Upload>
-      <p>{props.upload}</p>
-    </Upload>
-    <FileName>
-      <p>{props.fileName}</p>
-    </FileName>
-  </Label>
-);
+const InputFile = props => {
+  const { upload, fileName, name } = props;
+
+  return (
+    <ConnectForm>
+      {({ register }) => (
+        <Label htmlFor="file">
+          <Input type="file" id="file" {...register(name)}/>
+          <Upload>
+            <p>{upload}</p>
+          </Upload>
+          <FileName>
+            <p>{fileName}</p>
+          </FileName>
+        </Label>
+      )}
+    </ConnectForm>
+  );
+};
 
 const Label = styled.label`
   width: 100%;

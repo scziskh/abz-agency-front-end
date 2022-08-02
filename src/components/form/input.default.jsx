@@ -1,11 +1,19 @@
 import styled from 'styled-components';
+import { ConnectForm } from '../../helpers/connect-form';
 
-const InputDefault = props => (
-  <Wrapper>
-    <Input type={props.type} name={props.name} placeholder=" " />
-    <Label htmlFor={props.name}>{props.placeholder}</Label>
-  </Wrapper>
-);
+const InputDefault = props => {
+  const { type, name, placeholder } = props;
+  return (
+    <ConnectForm>
+      {({ register }) => (
+        <Wrapper>
+          <Input type={type} placeholder=" " {...register(name)} />
+          <Label htmlFor={name}>{placeholder}</Label>
+        </Wrapper>
+      )}
+    </ConnectForm>
+  );
+};
 
 const Wrapper = styled.div`
   position: relative;

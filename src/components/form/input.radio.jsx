@@ -1,11 +1,19 @@
 import styled from 'styled-components';
+import { ConnectForm } from '../../helpers/connect-form';
 
-const InputRadio = props => (
-  <Wrapper>
-    <Input type="radio" name={props.name} id={props.id} />
-    <Label htmlFor={props.id}>{props.label}</Label>
-  </Wrapper>
-);
+const InputRadio = props => {
+  const { name, label, id } = props;
+  return (
+    <ConnectForm>
+      {({ register }) => (
+        <Wrapper>
+          <Input type="radio" id={id} {...register(name)} />
+          <Label htmlFor={id}>{label}</Label>
+        </Wrapper>
+      )}
+    </ConnectForm>
+  );
+};
 
 const Wrapper = styled.div`
   position: relative;
