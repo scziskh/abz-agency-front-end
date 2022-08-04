@@ -6,16 +6,23 @@ const InputFile = props => {
 
   return (
     <ConnectForm>
-      {({ register }) => (
-        <Label htmlFor={`file`}>
-          <Input type={`file`} id={`file`} {...register(name)} />
-          <Upload>
-            <p>{upload}</p>
-          </Upload>
-          <FileName>
-            <p>{fileName}</p>
-          </FileName>
-        </Label>
+      {({ register, errors }) => (
+        <>
+          <Label htmlFor={`file`} {...console.log(errors)}>
+            <Input
+              type={`file`}
+              id={`file`}
+              {...register(name, { required: `is required` })}
+            />
+            <Upload>
+              <p>{upload}</p>
+            </Upload>
+            <FileName>
+              <p>{fileName}</p>
+            </FileName>
+            <Message>{errors}</Message>
+          </Label>
+        </>
       )}
     </ConnectForm>
   );
@@ -24,6 +31,7 @@ const InputFile = props => {
 const Label = styled.label`
   width: 100%;
   cursor: pointer;
+  position: relative;
 `;
 
 const Input = styled.input`
@@ -58,6 +66,12 @@ const FileName = styled.div`
   @media (max-width: 480px) {
     width: 247px;
   }
+`;
+
+const Message = styled.p`
+  position: absolute;
+  font-size: 12px;
+  left: 17px;
 `;
 
 export default InputFile;
