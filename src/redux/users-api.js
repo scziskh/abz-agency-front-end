@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const usersApi = createApi({
-  reducerPath: 'calculatorApi',
+  reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://frontend-test-assignment-api.abz.agency/api/v1/',
   }),
@@ -12,7 +12,11 @@ export const usersApi = createApi({
     getPositions: build.query({
       query: () => `positions`,
     }),
+    getToken: build.query({
+      query: () => 'token',
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useGetPositionsQuery } = usersApi;
+export const { useGetUsersQuery, useGetPositionsQuery, useGetTokenQuery } =
+  usersApi;

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 const InputSubmit = props => {
   const { name } = props;
 
-  return <Wrapper type={`submit`} {...props} value={name} />;
+  return <Input type={`submit`} {...props} value={name} />;
 };
 
-const Wrapper = styled.input`
+const Input = styled.input`
   ${props => (props.hide ? 'display: none;' : '')}
   margin: 0 auto;
   border: none;

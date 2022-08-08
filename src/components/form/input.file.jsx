@@ -1,32 +1,48 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { ConnectForm } from '../../helpers/connect-form';
 
 const InputFile = props => {
-  const { upload, fileName, name } = props;
+  const { upload, defaultName, name, properties } = props;
+  const [fileName, setFileName] = useState();
 
   return (
     <ConnectForm>
-      {({ register, errors }) => (
-        <>
-          <Label htmlFor={`file`} {...console.log(errors)}>
+      {({ register, formState: { errors }, getValues, setValue }) => (
+        <Wrapper {...errors?.[name]}>
+          <Label htmlFor={`file`}>
             <Input
               type={`file`}
               id={`file`}
-              {...register(name, { required: `is required` })}
+              {...register(name, {
+                onChange: () => {
+                  setFileName(getValues(name)[0].name);
+                  console.log(getValues(name));
+                },
+                ...properties,
+              })}
             />
-            <Upload>
+            <Upload {...errors?.[name]}>
               <p>{upload}</p>
             </Upload>
-            <FileName>
-              <p>{fileName}</p>
+            <FileName {...errors?.[name]}>
+              <p>{fileName || defaultName}</p>
             </FileName>
-            <Message>{errors}</Message>
           </Label>
-        </>
+          <Message>{errors?.[name]?.message}</Message>
+        </Wrapper>
       )}
     </ConnectForm>
   );
 };
+
+const Wrapper = styled.div`
+  position: relative;
+  label,
+  p {
+    color: ${({ message }) => (message ? 'red' : 'var(--formColor)')};
+  }
+`;
 
 const Label = styled.label`
   width: 100%;
@@ -39,7 +55,7 @@ const Input = styled.input`
 `;
 
 const Upload = styled.div`
-  border: 1px solid black;
+  border: ${({ message }) => (message ? '2px solid red' : '1px solid black')};
   border-radius: 4px 0 0 4px;
   width: 83px;
   height: 54px;
@@ -53,7 +69,8 @@ const Upload = styled.div`
 `;
 
 const FileName = styled.div`
-  border: 1px solid var(--formColor);
+  border: ${({ message }) =>
+    message ? '2px solid red' : '1px solid var(--formColor)'};
   color: var(--formColor);
   border-left: 0;
   border-radius: 0 4px 4px 0;

@@ -2,15 +2,20 @@ import styled from 'styled-components';
 import { ConnectForm } from '../../helpers/connect-form';
 
 const InputDefault = props => {
-  const { type, name, placeholder, helper } = props;
+  const { type, name, placeholder, helper, properties } = props;
   return (
     <ConnectForm>
-      {({ register, formState: { errors } }) => (
+      {({ register, formState: { errors }, setValue }) => (
         <Wrapper {...errors?.[name]}>
           <Input
             type={type}
             placeholder={` `}
-            {...register(name, { required: `Please enter your ${name}` })}
+            {...register(name, {
+              onChange: e => {
+                setValue(e.target.name, e.target.value);
+              },
+              ...properties,
+            })}
           />
           <Label htmlFor={name}>{placeholder}</Label>
           <Message>{errors?.[name]?.message || helper}</Message>

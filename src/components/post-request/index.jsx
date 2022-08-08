@@ -1,16 +1,56 @@
 import styled from 'styled-components';
-import { useGetPositionsQuery } from '../../redux/users-api';
+import { useGetPositionsQuery, useGetTokenQuery } from '../../redux/users-api';
 import { FormProvider, useForm } from 'react-hook-form';
 import InputDefault from '../form/input.default';
 import InputFile from '../form/input.file';
 import InputRadio from '../form/input.radio';
 import InputSubmit from '../form/input.submit';
 import Preloader from '../preloader';
+import { postFormConfig } from '../../helpers/configs';
 
 const PostRequest = () => {
-  const { data, isLoading } = useGetPositionsQuery();
+  const { data: positionsData, isLoading } = useGetPositionsQuery();
+  const { data: tokenData } = useGetTokenQuery();
 
-  const methods = useForm();
+  const methods = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: {
+      position_id: '1',
+    },
+  });
+
+  const { photo, ...queryParams } = methods.getValues();
+  queryParams.photo = photo?.[0];
+  queryParams.position_id = +queryParams.position_id;
+
+  const onSubmit = async () => {
+    // eslint-disable-next-line no-undef
+    const formData = new FormData();
+    formData.append('name', methods.getValues('name'));
+    formData.append('email', methods.getValues('email'));
+    formData.append('phone', methods.getValues('phone'));
+    formData.append('position_id', +methods.getValues('position_id'));
+    formData.append('photo', methods.getValues('photo')[0]);
+
+    // for (const [name, value] of Object.entries(queryParams)) {
+    //   formData.append(name, value);
+    // }
+
+    console.log(formData.getAll('photo'));
+    const response = await fetch(
+      'https://frontend-test-assignment-api.abz.agency/api/v1/users',
+      {
+        method: 'POST',
+        headers: { Token: tokenData.token },
+        body: formData,
+      },
+    );
+
+    if (response.ok) {
+      return await response.json();
+    }
+  };
 
   if (isLoading) {
     return <Preloader />;
@@ -20,19 +60,34 @@ const PostRequest = () => {
     <Wrapper>
       <h1> Working with POST request</h1>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit()}>
-          <InputDefault type={`text`} placeholder={`Your name`} name={`name`} />
-          <InputDefault type={`email`} placeholder={`Email`} name={`email`} />
-          <InputDefault type={`text`} placeholder={`Phone`} name={`phone`} />
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <InputDefault
+            type={`text`}
+            placeholder={`Your name`}
+            name={`name`}
+            properties={postFormConfig.name}
+          />
+          <InputDefault
+            type={`email`}
+            placeholder={`Email`}
+            name={`email`}
+            properties={postFormConfig.email}
+          />
+          <InputDefault
+            type={`text`}
+            placeholder={`Phone`}
+            name={`phone`}
+            properties={postFormConfig.phone}
+          />
           <div>
             <RadioHeader>Select your position</RadioHeader>
             <RadioGroup>
-              {data.positions.map(({ name, id }) => (
+              {positionsData.positions.map(({ name, id }) => (
                 <InputRadio
                   key={id}
                   label={name}
-                  id={`position_${id}`}
-                  name={`position`}
+                  value={`${id}`}
+                  name={`position_id`}
                 />
               ))}
             </RadioGroup>
@@ -40,8 +95,9 @@ const PostRequest = () => {
           <DivFile>
             <InputFile
               upload={`Upload`}
-              fileName={`Upload your photo`}
-              name={`upload-photo`}
+              defaultName={`Upload your photo`}
+              name={`photo`}
+              properties={postFormConfig.photo}
             />
           </DivFile>
           <InputSubmit name={`Sign up`} />

@@ -2,13 +2,24 @@ import styled from 'styled-components';
 import { ConnectForm } from '../../helpers/connect-form';
 
 const InputRadio = props => {
-  const { name, label, id } = props;
+  const { name, label, value } = props;
+  const htmlId = `${name}_${value}`;
+
   return (
     <ConnectForm>
-      {({ register }) => (
+      {({ register, setValue }) => (
         <Wrapper>
-          <Input type={`radio`} id={id} {...register(name)} />
-          <Label htmlFor={id}>{label}</Label>
+          <Input
+            type={`radio`}
+            id={htmlId}
+            {...register(name, {
+              onBlur: e => {
+                setValue(e.target.name, e.target.value);
+              },
+            })}
+            value={value}
+          />
+          <Label htmlFor={htmlId}>{label}</Label>
         </Wrapper>
       )}
     </ConnectForm>
