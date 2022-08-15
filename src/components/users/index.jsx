@@ -15,7 +15,7 @@ const Users = props => {
   const [totalUsers, setTotalUsers] = useState(null);
   const [hideButton, setHideButton] = useState(false);
 
-  const resolve = data => {
+  const resolve = async data => {
     const { users, total_users } = data;
     setUsers(state => state.concat(users));
     setTotalUsers(total_users);

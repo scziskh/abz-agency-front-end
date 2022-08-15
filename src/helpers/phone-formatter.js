@@ -1,4 +1,4 @@
-const phoneFormatter = (tel = '+380xxxxxxxxx') => {
+const phoneFormatter = tel => {
   const phone = tel.split('');
   phone.splice(3, '', ' (');
   phone.splice(7, '', ') ');

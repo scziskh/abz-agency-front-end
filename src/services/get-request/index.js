@@ -13,7 +13,7 @@ export const useGetRequest = (resolve, reject, subUrl) => {
       try {
         const result = await response.json();
         if (response.ok) {
-          resolve(result);
+          await resolve(result);
         } else {
           reject(result.message);
         }

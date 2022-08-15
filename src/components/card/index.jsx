@@ -1,32 +1,21 @@
 import styled from 'styled-components';
 import phoneFormatter from '../../helpers/phone-formatter';
+import CardElement from './element.card';
 
 const Card = props => {
-  const phone = phoneFormatter(props.user.phone);
-  const { photo, name, email, position } = props.user;
-
+  const { photo, name, email, position, phone } = props.user;
   return (
     <Wrapper>
       <Image>
         <img src={photo} />
       </Image>
       <Name>
-        <p>{name}</p>
-        <span>{name}</span>
+        <CardElement text={name} />
       </Name>
       <Contacts>
-        <div>
-          <p>{position}</p>
-          <span>{position}</span>
-        </div>
-        <div>
-          <p>{email}</p>
-          <span>{email}</span>
-        </div>
-        <div>
-          <p>{phone}</p>
-          <span>{phone}</span>
-        </div>
+        <CardElement text={position} />
+        <CardElement text={email} />
+        <CardElement text={phoneFormatter(phone)} />
       </Contacts>
     </Wrapper>
   );
@@ -42,25 +31,6 @@ const Wrapper = styled.div`
   div {
     overflow: hidden;
     white-space: nowrap;
-    p {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
-      &:hover ~ span {
-        display: block;
-      }
-    }
-    span {
-      margin-top: 12px;
-      display: none;
-      border-radius: 5px;
-      color: white;
-      background-color: #212121;
-      padding: 2px 8px;
-      position: absolute;
-      left: 45%;
-      z-index: 999;
-    }
   }
   @media (max-width: 768px) {
     width: calc((100% - 30px) / 2);
