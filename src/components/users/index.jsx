@@ -1,54 +1,58 @@
 import { useEffect, useState } from 'react';
-import { useGetUsersQuery } from '../../redux/users-api.js';
 import styled from 'styled-components';
-import Card from '../card/index.jsx';
+import Card from '../card';
 import Button from '../button/button.default.jsx';
-import Preloader from '../preloader/index.jsx';
+import Preloader from '../preloader';
+import ErrorGetRequest from '../errors/get-request';
+import { useGetRequest } from '../../services/get-request';
 
-const GetRequest = props => {
+const Users = props => {
   const count = props.countSteps;
   const [page, setPage] = useState(props.startPage);
-  const { data: usersData, isFetching } = useGetUsersQuery({ count, page });
 
   const [users, setUsers] = useState([]);
-
+  const [error, setError] = useState(null);
+  const [totalUsers, setTotalUsers] = useState(null);
   const [hideButton, setHideButton] = useState(false);
 
-  useEffect(() => {
-    if (usersData) {
-      setUsers(prevUsers => prevUsers.concat(usersData.users));
-    }
-  }, [usersData]);
+  const resolve = data => {
+    const { users, total_users } = data;
+    setUsers(state => state.concat(users));
+    setTotalUsers(total_users);
+  };
 
-  useEffect(() => {
-    if (usersData) {
-      setHideButton(usersData.total_users === users.length);
-    }
-  }, [users.length, usersData]);
+  const isLoading = useGetRequest(
+    resolve,
+    setError,
+    `users?page=${page}&count=${count}`,
+  );
+
+  useEffect(
+    () => setHideButton(totalUsers === users.length),
+    [totalUsers, users.length],
+  );
+
+  if (error) {
+    return <ErrorGetRequest message={error} />;
+  }
 
   return (
     <Wrapper>
       <h1>Working with GET request</h1>
       <CardsGroup>
         {users?.map((user, index) => (
-          <Card
-            key={index}
-            photo={user.photo}
-            name={user.name}
-            position={user.position}
-            email={user.email}
-            phone={user.phone}
-          ></Card>
+          <Card key={index} user={user}></Card>
         ))}
       </CardsGroup>
-      {isFetching ? (
+      {isLoading ? (
         <Preloader />
       ) : (
         <Button
           name={`Show more`}
-          func={() => setPage(page + 1)}
+          func={() => {
+            setPage(page => page + 1);
+          }}
           hide={hideButton}
-          isLoading={isFetching}
         />
       )}
     </Wrapper>
@@ -82,4 +86,4 @@ const CardsGroup = styled.div`
   } ;
 `;
 
-export default GetRequest;
+export default Users;

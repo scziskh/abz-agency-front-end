@@ -1,14 +1,14 @@
-import GetRequest from './components/get-request';
+import Users from './components/users';
 import MainSection from './components/main-section';
-import PostRequest from './components/post-request';
+import RegisterUser from './components/register-user';
 import MainLayer from './layers/mainLayer';
 
 const App = () => {
   return (
     <MainLayer>
       <MainSection />
-      <GetRequest countSteps={6} startPage={1} />
-      <PostRequest />
+      <Users countSteps={6} startPage={1} />
+      <RegisterUser />
     </MainLayer>
   );
 };

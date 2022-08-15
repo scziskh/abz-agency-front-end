@@ -1,42 +1,28 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { ConnectForm } from '../../helpers/connect-form';
 
 const InputFile = props => {
-  const { upload, defaultName, name, properties } = props;
+  const { upload, defaultName, name } = props;
   const [fileName, setFileName] = useState();
 
   return (
-    <ConnectForm>
-      {({ register, formState: { errors }, getValues, setValue }) => (
-        <Wrapper {...errors?.[name]}>
-          <Label htmlFor={`file`}>
-            <Input
-              type={`file`}
-              id={`file`}
-              {...register(name, {
-                onChange: () => {
-                  setFileName(getValues(name)[0].name);
-                  console.log(getValues(name));
-                },
-                ...properties,
-              })}
-            />
-            <Upload {...errors?.[name]}>
-              <p>{upload}</p>
-            </Upload>
-            <FileName {...errors?.[name]}>
-              <p>{fileName || defaultName}</p>
-            </FileName>
-          </Label>
-          <Message>{errors?.[name]?.message}</Message>
-        </Wrapper>
-      )}
-    </ConnectForm>
+    <Wrapper>
+      <Label htmlFor={`file`}>
+        <Input type={`file`} id={`file`} name={name} />
+        <Upload>
+          <p>{upload}</p>
+        </Upload>
+        <FileName>
+          <p>{fileName || defaultName}</p>
+        </FileName>
+      </Label>
+      <Message></Message>
+    </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.fieldset`
+  border: none;
   position: relative;
   label,
   p {

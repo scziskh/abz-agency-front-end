@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import phoneFormatter from '../../helpers/phone-formatter';
 
 const Card = props => {
-  const phone = phoneFormatter(props.phone);
-
-  const { photo, name, email, position } = props;
+  const phone = phoneFormatter(props.user.phone);
+  const { photo, name, email, position } = props.user;
 
   return (
     <Wrapper>

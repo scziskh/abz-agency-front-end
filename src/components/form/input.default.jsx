@@ -1,31 +1,18 @@
 import styled from 'styled-components';
-import { ConnectForm } from '../../helpers/connect-form';
 
 const InputDefault = props => {
-  const { type, name, placeholder, helper, properties } = props;
+  const { type, name, placeholder } = props;
   return (
-    <ConnectForm>
-      {({ register, formState: { errors }, setValue }) => (
-        <Wrapper {...errors?.[name]}>
-          <Input
-            type={type}
-            placeholder={` `}
-            {...register(name, {
-              onChange: e => {
-                setValue(e.target.name, e.target.value);
-              },
-              ...properties,
-            })}
-          />
-          <Label htmlFor={name}>{placeholder}</Label>
-          <Message>{errors?.[name]?.message || helper}</Message>
-        </Wrapper>
-      )}
-    </ConnectForm>
+    <Wrapper>
+      <Input type={type} placeholder={` `} name={name} />
+      <Label htmlFor={name}>{placeholder}</Label>
+      <Message></Message>
+    </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.fieldset`
+  border: none;
   position: relative;
   margin: 0 auto;
   width: 100%;
