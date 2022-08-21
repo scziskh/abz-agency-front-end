@@ -9,8 +9,8 @@ const Header = () => {
           <img src={`/assets/Logo.svg`} width={`104px`} height={`26px`} />
         </div>
         <div>
-          <ButtonLink name={`Users`} link={`/`} />
-          <ButtonLink name={`Sign up`} link={`/`} />
+          <ButtonLink name={`Users`} link={`#users`} />
+          <ButtonLink name={`Sign up`} link={`#sign-up`} />
         </div>
       </ContentWrapper>
     </Wrapper>

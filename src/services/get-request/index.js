@@ -2,35 +2,33 @@
 import { useEffect, useState } from 'react';
 import { config } from '../config';
 
-export const useGetRequest = (resolve, reject, subUrl) => {
+export const useGetRequest = subUrl => {
+  const { baseUrl } = config;
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  const url = `${baseUrl}${subUrl}`;
 
-  const request = async (resolve, reject, subUrl) => {
-    const { baseUrl } = config;
-
+  const request = async url => {
+    const response = await fetch(url);
     try {
-      const response = await fetch(`${baseUrl}${subUrl}`);
-      try {
-        const result = await response.json();
-        if (response.ok) {
-          await resolve(result);
-        } else {
-          reject(result.message);
-        }
-      } catch (error) {
-        reject(`Error ${response.status}`);
-      } finally {
-        setIsLoading(false);
+      const result = await response.json();
+      if (response.ok) {
+        setData(result);
+      } else {
+        setError(result.message);
       }
     } catch (error) {
-      setTimeout(() => request(resolve, reject, subUrl), 2000);
+      setError(`Error ${response.status}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     setIsLoading(true);
-    request(resolve, reject, subUrl);
-  }, [subUrl]);
+    request(url);
+  }, [url]);
 
-  return isLoading;
+  return { data, error, isLoading };
 };

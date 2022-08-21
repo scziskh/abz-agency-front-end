@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import InputDefault from '../form/input.default';
 import InputFile from '../form/input.file';
@@ -8,19 +7,18 @@ import ErrorGetRequest from '../errors/get-request';
 import { useGetRequest } from '../../services/get-request';
 
 const RegisterUser = () => {
-  const [positionsData, setPositionsData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useGetRequest(setPositionsData, setError, `positions`);
+  const { error, data } = useGetRequest(`positions`);
 
   const onSubmit = async () => {};
+
+
 
   if (error) {
     return <ErrorGetRequest message={error.message} />;
   }
 
   return (
-    <Wrapper>
+    <Wrapper id="sign-up">
       <h1> Working with POST request</h1>
       <form onSubmit={onSubmit}>
         <InputDefault type={`text`} placeholder={`Your name`} name={`name`} />
@@ -29,14 +27,16 @@ const RegisterUser = () => {
         <div>
           <RadioHeader>Select your position</RadioHeader>
           <RadioGroup>
-            {positionsData?.positions.map(({ name, id }) => (
-              <InputRadio
-                key={id}
-                label={name}
-                value={`${id}`}
-                name={`position_id`}
-              />
-            ))}
+            {data?.positions?.map(({ name, id }) => {
+              return (
+                <InputRadio
+                  key={id}
+                  label={name}
+                  value={`${id}`}
+                  name={`position_id`}
+                />
+              );
+            })}
           </RadioGroup>
         </div>
         <DivFile>

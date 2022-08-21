@@ -11,38 +11,42 @@ const Users = props => {
   const [page, setPage] = useState(props.startPage);
 
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState(null);
   const [totalUsers, setTotalUsers] = useState(null);
   const [hideButton, setHideButton] = useState(false);
 
-  const resolve = async data => {
-    const { users, total_users } = data;
-    setUsers(state => state.concat(users));
-    setTotalUsers(total_users);
-  };
-
-  const isLoading = useGetRequest(
-    resolve,
-    setError,
+  const { isLoading, error, data } = useGetRequest(
     `users?page=${page}&count=${count}`,
   );
 
   useEffect(
-    () => setHideButton(totalUsers === users.length),
-    [totalUsers, users.length],
+    () => setHideButton(totalUsers <= users.length * count),
+    [count, totalUsers, users.length],
   );
+
+  useEffect(() => {
+    if (data?.users) {
+      const { users } = data;
+      setUsers(state => {
+        const result = state.concat([users]);
+        return result;
+      });
+      setTotalUsers(data.total_users);
+    }
+  }, [data]);
 
   if (error) {
     return <ErrorGetRequest message={error} />;
   }
 
   return (
-    <Wrapper>
+    <Wrapper id="users">
       <h1>Working with GET request</h1>
       <CardsGroup>
-        {users?.map((user, index) => (
-          <Card key={index} user={user}></Card>
-        ))}
+        {users?.map(usersGroup =>
+          usersGroup?.map((user, index) => (
+            <Card key={`${user.id}${index}`} user={user}></Card>
+          )),
+        )}
       </CardsGroup>
       {isLoading ? (
         <Preloader />
@@ -58,7 +62,6 @@ const Users = props => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.section`
   text-align: center;
   h1 {

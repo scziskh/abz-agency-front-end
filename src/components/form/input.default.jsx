@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const InputDefault = props => {
   const { type, name, placeholder } = props;
+
   return (
     <Wrapper>
       <Input type={type} placeholder={` `} name={name} />
